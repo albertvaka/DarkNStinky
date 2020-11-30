@@ -131,7 +131,7 @@ function _initObject(object) {
 	if ("state" !in object) object.state <- null
 	if (object?.door_verbs == YES) {
 		if ("reach" !in object) object.reach <- REACH_MED
-		if ("autoclose" !in object) object.autoclose <- YES
+		if ("autoclose" !in object) object.autoclose <- NO
 		if ("state" !in object) object.state <- object?.no_animation ? "default" : "closed"
 		if ("door_trigger" in object) {
 			local trigger = is_function(object.door_trigger) ? object.door_trigger() : object.door_trigger
@@ -1161,7 +1161,7 @@ function exitRoomFromDoor(from_door, to_door) {
 		if (isActorInRoom()) actorWalkForward(selectedActor, to_door?.walk_forward?:4)
 	}
 	if (to_door?.autoclose) {
-		to_door.default_verb <- to_door?.no_animation ? "verb_use" : "verb_open"
+		to_door.default_verb <- to_door?.no_animation ? "verb_enter" : "verb_open"
 		startthread(@{
 			breaktime(0.10)
 			if (is_function(to_door?.verb_close)) to_door.verb_close()

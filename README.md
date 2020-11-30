@@ -1,3 +1,10 @@
+
+**Dark'n Stinky** is a game made reusing assets and code from **Delores: A Thimbleweed Park mini-adventure**. I wanted to try the engine out, and I thought I could fork Delores and make my own game as a test.
+
+Below follows the original README from the [Delores repository](https://github.com/grumpygamer/DeloresDev).
+
+-----
+
 This is the source code to **Delores: A Thimbleweed Park mini-adventure**. Read [Grumpy Gamer](http://grumpygamer.com/delores_dev) for more background.
 
 ## License

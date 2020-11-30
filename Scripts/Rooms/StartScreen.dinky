@@ -31,7 +31,6 @@ script doOpening() {
 	}, @{
 		overlayColor(COLOR_NONE)
 		objectState(Nickel.door, "closed")
-		actorAt(delores, Nickel, Nickel.natalieTalkSpot)
 		cameraFollow(delores)
 		pickupObject(Inventory.assignment, delores)
 		if (DEBUG(skip_intro)) {

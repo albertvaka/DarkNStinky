@@ -18,7 +18,6 @@ DEFINE_ROOM("Alleyway", {
 				breaktime(0.01, 0.2)
 				objectState(blueNeon, "on")
 				roomLightEnable(1, YES)
-				playSoundAt(SOUNDID(flicker_fluorescent), blueNeon)
 				breaktime(1.0, 4.0)
 				objectState(blueNeon, "off")
 				roomLightEnable(1, NO)

@@ -129,7 +129,7 @@ DEFINE_ROOM("Note", {
 			completed_stories = []
 		}
 
-		Bathroom.has_power = getprivatepref("bathroom_power", NO)
+		Bathroom.has_power = YES
 
 		// Find stories that haven't been completed.
 		active_stories = arrayfilter(possible_stories, @(index,story) {

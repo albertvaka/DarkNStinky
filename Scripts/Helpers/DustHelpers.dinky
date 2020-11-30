@@ -44,6 +44,7 @@ function _create_dust(pos) {
 }
 
 function createSpeckOfDust(room) {
+	return
 	if (not isActorInRoom(selectedActor)) return
 	if (room?.no_speck_of_dust) return			// Not in this room.
 

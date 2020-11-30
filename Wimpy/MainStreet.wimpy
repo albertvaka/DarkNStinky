@@ -496,25 +496,6 @@ objects: [
         usepos: (0,-30)
     }
     {
-        name: "alleyBlueNeon"
-        prop: 1
-        zsort: 136
-        animations: [
-            {
-                name: "on"
-                frames: [
-                    "diner_side_blue_neon_on"
-                ]
-            }
-            {
-                name: "off"
-                frames: [
-                ]
-            }
-        ]
-        pos: (2321,167)
-    }
-    {
         name: "scalingCityHall"
         trigger: 1
         usedir: "DIR_FRONT"

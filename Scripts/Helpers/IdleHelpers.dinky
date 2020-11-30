@@ -54,11 +54,11 @@ function actorEyesLook(actor, dir) {
 
 function startActorIdles(actor) {
 	if (GLOBAL(no_idle_animations)) return
-	if (actor == delores) {
-		startActorIdle(delores, 5.0, [ "stand", "brushhair", "shift_bag", "shift_weight" ])
-	} else
 	if (actor == leonard) {
-	 	startActorIdle(leonard, 5.0, [ "stand", "stand", "stand_scratch_face", "stand_scratch_face", "stand_scratch_face2", "stand_nametag" ])
+		startActorIdle(leonard, 5.0, [ "stand", "brushhair", "shift_bag", "shift_weight" ])
+	} else
+	if (actor == delores) {
+	 	startActorIdle(delores, 5.0, [ "stand", "stand", "stand_scratch_face", "stand_scratch_face", "stand_scratch_face2", "stand_nametag" ])
 	} else
 	if (actor == morena) {
 	 	startActorIdle(morena, 6.0, [ "stand", "stand", "stand", "stand", "pull_up_skirt", "hands_on_hips8", "hands_on_hips4", "rubbing_hands", "rubbing_hands", "rubbing_hands" ])

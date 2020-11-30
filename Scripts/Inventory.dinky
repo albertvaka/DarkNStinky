@@ -13,77 +13,32 @@ DEFINE_ROOM("Inventory", {
 
 	// --------------------------------------------------------------------------------------------
 	glass = DEFINE_INVENTORY("glass", {
-		filled_with = NO
+		filled_with = "water"
 		looked_at = NO
 		drink_count = 0
-		for_story =@ (filled_with == "water") ? "bad_water" : null
-		bad_story = [ "bad_water", SAY(11883,"A photo of an empty glass isn't good enough.") ]
 
 		icon = @filled_with?"glass_with_water":"glass"
 		name = @{
-			if (filled_with == "water") return looked_at ? TEXT(11976,"glass of polluted water") : TEXT(11977,"glass of water")
+			if (filled_with == "water") return looked_at ? TEXT(11976,"glass of water") : TEXT(11977,"glass of water")
 			return TEXT(12484,"empty glass")
-		}
-		photo_name = @{
-			if (filled_with == "water") return looked_at ? TEXT(11978,"a glass of polluted water") : TEXT(11979,"a glass of water")
-			return TEXT(12485,"an empty glass")
 		}
 
 		VERB(lookat) {
 			if (filled_with) {
 				looked_at = YES
-				sayLine(SAY(11884,"It's a glass of polluted water!"))
+				sayLine(SAY(11884,"It's a glass of water!"))
 			} else {
 				sayLine(SAY(11885,"It's an empty glass."))
 			}
 		}
 		VERB_OK(drink) { return filled_with && !selectedActor?.on_ladder }
 		VERB(drink) {
-			drink_count++
-			if (drink_count < 4) {
-				actorTurnTo(delores, DIR_FRONT)
-				sayLine(randomfrom(SAY(11886,"I don't think that's smart."), SAY(11887,"I can barely stand the smell!"), SAY(11888,"That's not a good idea.")))
-			} else {
-				filledWith(null)
-				cutscene(@{
-					actorTurnTo(delores, DIR_BACK)
-					sayLine(SAY(11889,"Ok, here goes."))
-					breaktime(0.25)
-					breakwhiletalking(delores)
-					playAnimation(delores, "drinking_start")
-					breakwhileanimating(delores)
-					delores.sid <- playSoundAt(SOUNDID(drinking), delores)
-					playAnimation(delores, "drinking_loop", LOOPING)
-					breakwhilesound(delores.sid)
-					breaktime(5.5)
-					playAnimation(delores, "drinking_end")
-					breakwhileanimating(delores)
-					actorFace(delores, DIR_RIGHT)
-					actorCostume(delores, "DeloresVomitAnimation")
-					playAnimation(delores, "vomit")
-					breaktime(0.5)
-					delores.sid = playSoundAt(SOUNDID(vomit), delores)
-					sayLine(randomfrom(SAY(11890,"*huurrrll*"),
-									   SAY(11891,"*bleeeuuurrrggghh*"),
-									   SAY(11892,"*raaaaaallllllllllffff*")))
-					breakwhileanimating(delores)
-					actorCostume(delores, "DeloresAnimation")
-					breaktime(1)
-					sayLine(SAY(11893,"*sigh*"))
-					breaktime(2)
-					actorTurnTo(delores, DIR_FRONT)
-					sayLine(SAY(11894,"I feel better now."))
-				})
-			}
-		}
-
-		function filledWith(stuff) {
-			filled_with = stuff
-			if (filled_with) {
-				bad_story = null
-			} else {
-				bad_story = [ "bad_water", SAY(11895,"A photo of an empty glass isn't good enough.") ]
-			}
+			filled_with = null
+			cutscene(@{
+				delores.sid <- playSoundAt(SOUNDID(drinking), delores)
+				playAnimation(delores, "drinking_loop", LOOPING)
+				breakwhilesound(delores.sid)
+			})
 		}
 	})
 
@@ -451,7 +406,7 @@ DEFINE_ROOM("Inventory", {
 			sayLine(SAY(11938,"It's a screwdriver."))
 		}
 
-		VERB_OK(jab_with) { return noun2 == Diner.radio || noun2 == SheriffsOffice.radio || noun2 == Bathroom.lightswitch }
+		VERB_OK(jab_with) { return noun2 == SheriffsOffice.radio || noun2 == Bathroom.lightswitch }
 		VERB(jab_with) {
 			if (currentRoom == Bathroom && !Bathroom.lights_on) {
 					sayLine(SAY(11939,"It's too dark to see."))
@@ -460,7 +415,7 @@ DEFINE_ROOM("Inventory", {
 			cutscene(@{
 				breaktime(0.10)
 				actorStopReach()
-				if (noun2 == Diner.radio || noun2 == SheriffsOffice.radio) {
+				if (noun2 == SheriffsOffice.radio) {
 					if (noun2.state == "on") noun2.verb_turn_off()
 				}
 				playSound(SOUNDID(electric_shock))

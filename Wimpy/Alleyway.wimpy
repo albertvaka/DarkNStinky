@@ -5,11 +5,6 @@ room_scale: 4
 roomsize: "{320,180}"
 sheet: "Alleyway"
 layers: [
-    {
-        name: "foreground"
-        parallax: 1
-        zsort: -2
-    }
 ]
 lights: [
     {

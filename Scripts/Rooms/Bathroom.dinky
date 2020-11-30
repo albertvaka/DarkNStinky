@@ -8,14 +8,13 @@
 DEFINE_ROOM("Bathroom", {
 
 	no_speck_of_dust = YES
-	has_power = NO
+	has_power = YES
 	tried_switch = NO
-	lights_on = NO
-	lights_off = YES	// We should only have "lights_off", but it's too late to make a big change.
+	lights_on = YES
+	lights_off = NO	// We should only have "lights_off", but it's too late to make a big change.
 
 	// ------------------------------------------------------------------------
 	// General room functions
-
 	function adjustLights() {
 		roomLayer(Bathroom, -1, NO)
 		roomLayer(Bathroom, -2, NO)
@@ -96,15 +95,12 @@ DEFINE_ROOM("Bathroom", {
 	// --------------------------------------------------------------------------------------------
 	doorLightingOverlay = {}
 	bathroomDoor = DEFINE_OBJECT({
-		name = TEXT(11524,"bathroom door")
-		photo_name = TEXT(11525,"the bathroom door")
-		door_verbs = YES
-		autoclose = NO
-		verb_use_text = TEXT(11526,"Leave")
-		verb_use_desc = TEXT(11527,"Leave bathroom")
-		to_door = @QuickiePalOutside.bathroomDoor
-		function stateChange() {
-			adjustLights()
+		name = @lights_on?TEXT(11529,"WC"):TEXT(11530,"something")
+		default_verb = "verb_leave"
+		no_animate = YES
+		VERB_OK(leave) { return lights_on }
+		VERB(leave) {
+			exitRoomFromDoor(this, Diner.dinerBackDoor)
 		}
 	})
 
@@ -114,15 +110,19 @@ DEFINE_ROOM("Bathroom", {
 		name = TEXT(11528,"light switch")
 		article = TEXT(12416,"a")
 		default_verb = "verb_flip"
+		state = "on"
 
 		VERB(flip) {
-			playSound(SOUNDID(light_switch))
-			if (not Bathroom.has_power) {
-				sayLine(SAY(11494,"I don't think the power is on."))
-				tried_switch = YES
-				return
-			}
-			objectState(this, (state == "on") ? "off" : "on")
+			cutscene(@{
+				playSound(SOUNDID(light_switch))
+				objectState(this, (state == "on") ? "off" : "on")
+				breaktime(1)
+				sayLine(SAY(11495,"This is scary!"))
+				breakwhiletalking()
+				playSound(SOUNDID(light_switch))
+				objectState(this, (state == "on") ? "off" : "on")
+				sayLine(SAY(11495,"Much better now."))
+			})
 		}
 		function stateChange() {
 			adjustLights()
@@ -232,7 +232,7 @@ DEFINE_ROOM("Bathroom", {
 		}
 		VERB(empty) {
 			if (noun2 == Inventory.glass) {
-				Inventory.glass.filledWith(null)
+				Inventory.glass.filled_with = null
 				playSoundAt(SOUNDID(water_pour), this)
 				sayLine(SAY(11502,"Down the drain."))
 			}
@@ -325,7 +325,7 @@ DEFINE_ROOM("Bathroom", {
 					breaktime(0.25)
 					playSoundAt(SOUNDID(water_fill_glass), this)
 					breaktime(1.5)
-					Inventory.glass.filledWith("water")
+					Inventory.glass.filled_with = "water"
 					refreshInventory()
 					playAnimation(delores, "stand")
 					sayLine(SAY(11509,"That should do it."))

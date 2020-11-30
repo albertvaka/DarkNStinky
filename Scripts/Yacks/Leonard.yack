@@ -1,61 +1,122 @@
-// ----------------------------------------------------------------------------
-//
-//  Copyright (c) 2020 Terrible Toybox, Inc. All rights reserved.
-//  Licensed for personal use only: https://github.com/grumpygamer/DeloresDev
-//
-// ----------------------------------------------------------------------------
-
 === init ===
-{ YACK(dont_call_D) = NO }
+{ YACK(i_started_conversation) <- NO }
 -> exit
 
-== start ===
-{
-	QuickiePal.leonard_rambleTID = stopthread(QuickiePal.leonard_rambleTID)
-	actorWalkTo(leonard, QuickiePal.leonardSpot)
-	breakwhilewalking(leonard)
-}
-leonard: SAY(12118,"What's up D!") [!YACK(dont_call_D)]
-leonard: SAY(12119,"What's up Delores!") [YACK(dont_call_D)]
 
-if [GLOBAL(letter_mailed)]
-	leonard: SAY(12120,"Thanks for mailing that letter.") [once]
-endif
+== start ===
+{ YACK(i_started_conversation) <- YES }
+delores: SAY(22118, "Hi!") [once]
+leonard: SAY(22119, "Howdy!") [once]
+-> main
+
+== they_start ===
+leonard: SAY(22120, "Hi! My name is Carla.") [once]
+-> main
 
 === main ===
-1 SAY(12121,"Don't call me D.") -> no_D [!YACK(dont_call_D)]
-2 SAY(12122,"Hey Leonard.") -> hey
-3 SAY(12123,"Bathroom light switch doesn't work.") -> light_switch [Bathroom.tried_switch] [once]
-3 SAY(12124,"Bathroom light switch still doesn't work.") -> light_switch2 [Bathroom.tried_switch and not Bathroom.has_power]
-9 SAY(12125,"See ya!") -> done
+leonard: SAY(22121, "We are almost in! Are you on your own?")
+1 SAY(22122,"Yes. My life has been a series of poor choices.") -> dont_get_you
+2 SAY(22123,"Yes, but at least I don't talk to the people in line.") -> dont_get_you [!YACK(i_started_conversation)]
+3 SAY(22124,"My friends are just a bit late.") -> advance_in_queue
+4 SAY(22125,"Bye.") -> done_in_line
 
-=== no_D ===
+=== dont_get_you ===
 { YACK(dont_call_D) = YES }
-leonard: SAY(12126,"OK, sure thing D... I mean Delores.")
--> main
+leonard: SAY(22126, "I don't get what you mean, but you seem so funny!")
+-> advance_in_queue
 
-=== hey ===
-leonard: SAY(12127,"Hey back at ya!")
--> main
+=== advance_in_queue ===
+leonard: SAY(22127,"I'm also on my own. Don't worry, it's gonna be fun!")
+natalie: SAY(22128,"Next!")
+waitfor coroner
+{
+	inputOff(@{
+		actorWalkTo(coroner, AStreet.postOfficeDoor)
+		breakwhilewalking(coroner)
+		actorAt(coroner, Diner, Diner.daveSpot1)
+		sayLine(leonard, SAY(21997,"We are almost inside"))
+		actorWalkTo(delores, AStreet.cuaSecondSpot)
+		actorWalkTo(leonard, AStreet.cuaFirstSpot)
+		breakwhilewalking(leonard)
+		coroner.name = TEXT(71540,"creep")
+		actorFace(leonard, DIR_LEFT)
+	})
+}
+-> what_kind_of_person
 
-=== light_switch ===
-leonard: SAY(12128,"Yeah. About that.")
-leonard: SAY(12129,"Management forgot to pay the power bill, so they cut power to the bathroom.")
-leonard: SAY(12130,"If it doesn't get paid soon, the whole building will lose power, man.")
-delores: SAY(12131,"Did management forget, or did you forget to mail the payment?")
-leonard: SAY(12132,"I don't think this is the time to be pointing fingers!")
-leonard: SAY(12133,"Here is the payment, can you drop it in a mailbox for me... I mean management?")
-delores: SAY(12134,"Sure.")
-{ pickupObject(Inventory.letter) }
--> done
+=== what_kind_of_person ===
+1 SAY(22129,"Why are you here?") -> what_type_of_person
+2 SAY(22130,"What are your hobbies?") -> what_do_you_do
+3 SAY(22131,"Let's skip the club and go straight to the bad sex.") -> skip_flirting [once]
 
-=== light_switch2 ===
-leonard: SAY(12135,"Management forgot to pay the power bill I gave you.")
-leonard: SAY(12136,"If it doesn't get paid soon, the whole building will lose power, man.")
-leonard: SAY(12137,"Can you drop the payment in a mailbox for me... I mean management?")
-delores: SAY(12138,"Sure.")
+=== skip_flirting ===
+leonard: SAY(22132,"What?!")
+delores: SAY(22133,"Ah, I was kidding.")
+-> what_kind_of_person
+
+=== what_type_of_person ===
+leonard: SAY(22134,"I like to dance and have fun!")
+delores: SAY(22135,"Such a unique personality.")
+-> advance_again
+
+=== what_do_you_do ===
+leonard: SAY(22136,"I like nature, sport and watching Netflix!")
+delores: SAY(22137,"VERY uncommon.")
+-> advance_again
+
+=== advance_again ===
+delores: SAY(22138,"But don't worry, I'm also dead inside.")
+natalie: SAY(22139,"Next!")
+waitfor leonard
+{
+	inputOff(@{
+		actorWalkTo(leonard, AStreet.postOfficeDoor)
+		breakwhilewalking(leonard)
+		actorFace(leonard, DIR_FRONT)
+		sayLine(leonard, SAY(21998,"See you inside!"))
+		breakwhiletalking(leonard)
+		actorAt(leonard, Diner, Diner.daveSpot2)
+		actorWalkTo(delores, AStreet.cuaFirstSpot)
+		breakwhilewalking(delores)
+		sayLine(delores, SAY(21999,"At least I had some fun while waiting in line."))
+		breakwhiletalking(delores)
+		sayLine(natalie, SAY(22128,"Next!"))
+		leonard.name = TEXT(71222,"normie girl")
+		AStreet.line_done = YES
+	})
+}
+-> done_in_line
+
+=== in_club ===
+-> once_inside [once]
+leonard: SAY(22141,"This is my favorite song!")
+-> exit
+
+=== once_inside ===
+delores: SAY(22142,"Hey, you are the girl from the line!")
+leonard: SAY(22143,"This is my favorite song!")
+delores: SAY(22144,"Lucky you.")
+delores: SAY(22145,"They play it all the time on the radio.")
+delores: SAY(22146,"That's a lot of oportunities to enjoy your favorite song.")
+waitfor leonard
+{
+	inputOff(@{
+		actorFace(delores, DIR_FRONT)
+		breaktime(0.5)
+	})
+}
+delores: SAY(22147,"She is ignoring me.")
+-> exit
+
+=== done_in_line ===
+waitfor leonard
+{
+	inputOff(@{
+		actorFace(leonard, DIR_RIGHT)
+	})
+}
+-> exit
 
 === done ===
-{ QuickiePal.leonard_rambleTID = startthread(QuickiePal.leonardGreeting) }
 -> exit
 

@@ -9,18 +9,22 @@
 -> exit
 
 === start ===
-delores: SAY(12314,"Hi Willie.")
-willie: SAY(12315,"Hello Delores.")
+{
+    actorFace(delores, DIR_BACK)
+}
+delores: SAY(12314,"Hi.")
+-> drugs [once]
+willie: SAY(12315,"Enjoy your night.")
+-> done
 
-1 SAY(12316,"You're closing up late.") -> late
-2 SAY(12317,"How's business?") -> late
+=== drugs ===
+willie: SAY(12315,"Are you looking for something?.")
+1 SAY(12316,"I don't do drugs, thanks.") -> late
+2 SAY(12317,"I want the strongest stuff you have.") -> late
 
 === late ===
-
-willie: SAY(12318,"Business is booming.")
-willie: SAY(12319,"Sorry I can't talk, I've got to get home.")
-willie: SAY(12320,"It's my night to cook dinner.")
-
+willie: SAY(12319,"I just sell brown sugar, in little bags.")
+willie: SAY(12320,"Makes me the same money and it's legal.")
 -> done
 
 === done ===

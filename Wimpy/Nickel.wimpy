@@ -428,198 +428,6 @@ objects: [
         usepos2: (4,-52)
     }
     {
-        name: "nickelFarPaperStack"
-        prop: 1
-        zsort: 74
-        animations: [
-            {
-                name: "default"
-                frames: [
-                    "far_paper_stack"
-                ]
-            }
-        ]
-        pos: (308,85)
-    }
-    {
-        name: "nickelMidPaperStack"
-        prop: 1
-        zsort: 69
-        animations: [
-            {
-                name: "default"
-                frames: [
-                    "mid_paper_stack"
-                ]
-            }
-        ]
-        pos: (258,104)
-    }
-    {
-        name: "nickelLeftPaperStack"
-        prop: 1
-        zsort: 71
-        animations: [
-            {
-                name: "default"
-                frames: [
-                    "left_paper_stack"
-                ]
-            }
-        ]
-        pos: (152,77)
-    }
-    {
-        name: "nickelNearPaperStack"
-        prop: 1
-        zsort: 59
-        animations: [
-            {
-                name: "default"
-                frames: [
-                    "near_paper_stack"
-                ]
-            }
-        ]
-        pos: (209,85)
-    }
-    {
-        name: "newspaper1"
-        usedir: "DIR_RIGHT"
-        zsort: 70
-        hotspot: ((-20,16),(8,20))
-        pos: (148,79)
-        usepos: (-28,-19)
-    }
-    {
-        name: "newspaper2"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-1,-1),(24,2))
-        pos: (155,69)
-        usepos: (14,-8)
-    }
-    {
-        name: "newspaper3"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-20,16),(8,20))
-        pos: (201,95)
-        usepos: (-11,-34)
-    }
-    {
-        name: "newspaper4"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-16,-4),(9,0))
-        pos: (224,77)
-        usepos: (-5,-16)
-    }
-    {
-        name: "newspaper5"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-20,16),(8,20))
-        pos: (254,70)
-        usepos: (-6,-10)
-    }
-    {
-        name: "newspaper6"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-20,16),(5,20))
-        pos: (282,58)
-        usepos: (-5,3)
-    }
-    {
-        name: "newspaper7"
-        usedir: "DIR_LEFT"
-        zsort: 70
-        hotspot: ((1,16),(10,20))
-        pos: (156,69)
-        usepos: (19,-2)
-    }
-    {
-        name: "newspaper8"
-        usedir: "DIR_LEFT"
-        zsort: 70
-        hotspot: ((-7,16),(8,19))
-        pos: (165,78)
-        usepos: (17,-7)
-    }
-    {
-        name: "newspaper9"
-        usedir: "DIR_LEFT"
-        zsort: 70
-        hotspot: ((-2,16),(5,19))
-        pos: (173,77)
-        usepos: (15,-3)
-    }
-    {
-        name: "newspaper10"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-1,16),(8,19))
-        pos: (211,68)
-        usepos: (3,7)
-    }
-    {
-        name: "newspaper11"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-20,18),(3,20))
-        pos: (241,122)
-        usepos: (-9,-48)
-    }
-    {
-        name: "newspaper12"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((4,14),(11,17))
-        pos: (258,68)
-        usepos: (3,5)
-    }
-    {
-        name: "newspaper13"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-20,16),(-3,20))
-        pos: (291,76)
-        usepos: (-12,-4)
-    }
-    {
-        name: "newspaper14"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-20,14),(-6,17))
-        pos: (312,68)
-        usepos: (-13,3)
-    }
-    {
-        name: "newspaper15"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-17,17),(0,20))
-        pos: (323,70)
-        usepos: (-8,0)
-    }
-    {
-        name: "newspaper16"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-17,16),(-2,20))
-        pos: (305,80)
-        usepos: (-9,-5)
-    }
-    {
-        name: "newspaper17"
-        usedir: "DIR_FRONT"
-        zsort: 70
-        hotspot: ((-6,16),(-2,20))
-        pos: (333,70)
-        usepos: (-2,5)
-    }
-    {
         name: "overseeMapReplacementSpot"
         spot: 1
         usedir: "DIR_BACK"
@@ -899,10 +707,34 @@ objects: [
         usepos2: (-64,-49)
     }
     {
-        name: "natalieTalkSpot"
+        name: "cuaFirstSpot"
         spot: 1
-        usedir: "DIR_BACK"
-        pos: (81,55)
+        usedir: "DIR_RIGHT"
+        pos: (230,60)
+    }
+    {
+        name: "cuaSecondSpot"
+        spot: 1
+        usedir: "DIR_RIGHT"
+        pos: (180,60)
+    }
+    {
+        name: "cuaThirdSpot"
+        spot: 1
+        usedir: "DIR_RIGHT"
+        pos: (130,60)
+    }
+    {
+        name: "bubaSpot"
+        spot: 1
+        usedir: "DIR_FRONT"
+        pos: (300,70)
+    }
+    {
+        name: "startSpot"
+        spot: 1
+        usedir: "DIR_FRONT"
+        pos: (200,30)
     }
     {
         name: "jumpSpot"
@@ -1006,17 +838,6 @@ scaling: [
 ]
 walkboxes: [
     {
-        polygon: "(246,78);(290,78);(291,76);(335,76);(337,75);(282,75);(281,71);(340,71);(341,70);(278,70);(277,73);(192,73);(184,66);(317,66);(323,57);(336,56);(351,42);(303,33);(301,55);(300,60);(162,60);(188,75);(244,75)"
-    }
-    {
-        polygon: "(3,33);(0,59);(104,59);(124,70);(123,75);(144,76);(118,55);(301,55);(303,33)"
-    }
-    {
-        name: "natalie_desk"
-        polygon: "(26,77);(109,77);(108,73);(77,73);(60,67);(2,67)"
-    }
-    {
-        name: "desk_path"
-        polygon: "(109,77);(123,75);(124,70);(108,73)"
+        polygon: "(3,33);(0,59);(41,77);(86,80);(123,75);(144,76);(161,78);(198,84);(318,84);(336,45)"
     }
 ]

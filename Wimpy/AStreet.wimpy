@@ -133,6 +133,36 @@ lights: [
 ]
 objects: [
     {
+        name: "cuaFirstSpot"
+        spot: 1
+        usedir: "DIR_RIGHT"
+        pos: (1200,70)
+    }
+    {
+        name: "cuaSecondSpot"
+        spot: 1
+        usedir: "DIR_RIGHT"
+        pos: (1150,70)
+    }
+    {
+        name: "cuaThirdSpot"
+        spot: 1
+        usedir: "DIR_RIGHT"
+        pos: (1100,70)
+    }
+    {
+        name: "bubaSpot"
+        spot: 1
+        usedir: "DIR_LEFT"
+        pos: (1280,70)
+    }
+    {
+        name: "startSpot"
+        spot: 1
+        usedir: "DIR_FRONT"
+        pos: (1100,30)
+    }
+    {
         name: "postOfficeDoor"
         usedir: "DIR_BACK"
         usedir2: "DIR_BACK"
@@ -175,20 +205,6 @@ objects: [
             }
         ]
         pos: (1241,128)
-    }
-    {
-        name: "postOfficeDoorRailing"
-        prop: 1
-        zsort: 88
-        animations: [
-            {
-                name: "default"
-                frames: [
-                    "railing"
-                ]
-            }
-        ]
-        pos: (1233,106)
     }
     {
         name: "nickelDoor"
@@ -361,7 +377,7 @@ objects: [
             }
         ]
         hotspot: ((-14,-35),(15,1))
-        pos: (1600,125)
+        pos: (1800,125)
         usepos: (0,-38)
         usepos2: (-5,-54)
     }
@@ -386,33 +402,19 @@ objects: [
                 ]
             }
         ]
-        pos: (1599,136)
+        pos: (1899,136)
     }
     {
         name: "willieSitSpot"
         spot: 1
         usedir: "DIR_FRONT"
-        pos: (1606,92)
-    }
-    {
-        name: "mainStreetDoor"
-        usedir: "DIR_LEFT"
-        zsort: 124
-        hotspot: ((-69,-128),(-29,121))
-        pos: (57,124)
-        usepos: (-49,-55)
-    }
-    {
-        name: "startSpot"
-        spot: 1
-        usedir: "DIR_FRONT"
-        pos: (683,74)
+        pos: (1585,85)
     }
     {
         name: "willieTalkSpot"
         spot: 1
         usedir: "DIR_BACK"
-        pos: (1587,72)
+        pos: (1572,77)
     }
     {
         name: "bottle"
@@ -604,56 +606,6 @@ objects: [
         pos: (138,165)
     }
     {
-        name: "bookStoreInsideLightsTrigger"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 86
-        hotspot: ((-40,-10),(63,22))
-        pos: (2200,86)
-        usepos: (0,-30)
-    }
-    {
-        name: "bookStoreLampTrigger"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 86
-        hotspot: ((-48,-29),(168,22))
-        pos: (2106,87)
-        usepos: (0,-30)
-    }
-    {
-        name: "bookStoreSign"
-        usedir: "DIR_BACK"
-        zsort: 86
-        hotspot: ((-16,-18),(14,16))
-        pos: (2102,145)
-        usepos: (6,-65)
-    }
-    {
-        name: "triggerGrass"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 121
-        hotspot: ((-187,-32),(50,3))
-        pos: (200,121)
-        usepos: (0,-30)
-    }
-    {
-        name: "triggerGrass2"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 115
-        hotspot: ((-62,-26),(53,-13))
-        pos: (749,115)
-        usepos: (0,-30)
-    }
-    {
-        name: "bookStoreExitSpot"
-        spot: 1
-        usedir: "DIR_LEFT"
-        pos: (2186,101)
-    }
-    {
         name: "phone"
         prop: 1
         zsort: 87
@@ -670,156 +622,7 @@ objects: [
                 ]
             }
         ]
-        pos: (1096,124)
-    }
-    {
-        name: "phoneBook"
-        prop: 1
-        zsort: 87
-        animations: [
-            {
-                name: "here"
-                frames: [
-                    "phone_book"
-                ]
-            }
-            {
-                name: "gone"
-                frames: [
-                ]
-            }
-        ]
-        pos: (1088,117)
-    }
-    {
-        name: "LaserdiscChaletRail"
-        prop: 1
-        zsort: 90
-        animations: [
-            {
-                name: "default"
-                frames: [
-                    "coffe_shop_rail"
-                ]
-            }
-        ]
-        pos: (1096,155)
-    }
-    {
-        name: "pergola"
-        prop: 1
-        zsort: 47
-        animations: [
-            {
-                name: "default"
-                frames: [
-                    "pergola"
-                ]
-            }
-        ]
-        pos: (2241,83)
-    }
-    {
-        name: "pergolaEyes1"
-        prop: 1
-        zsort: 100
-        animations: [
-            {
-                name: "state0"
-                frames: [
-                    "eyes1_closed"
-                ]
-            }
-            {
-                name: "state1"
-                frames: [
-                    "eyes1_s"
-                ]
-            }
-        ]
-        pos: (1821,118)
-    }
-    {
-        name: "pergolaEyes2"
-        prop: 1
-        zsort: 101
-        animations: [
-            {
-                name: "state0"
-                frames: [
-                    "eyes2_closed"
-                ]
-            }
-            {
-                name: "state1"
-                frames: [
-                    "eyes2_s"
-                ]
-            }
-        ]
-        pos: (1837,167)
-    }
-    {
-        name: "pergolaEyes3"
-        prop: 1
-        zsort: 101
-        animations: [
-            {
-                name: "state0"
-                frames: [
-                    "eyes3_closed"
-                ]
-            }
-            {
-                name: "state1"
-                frames: [
-                    "eyes3_s"
-                ]
-            }
-        ]
-        pos: (1842,130)
-    }
-    {
-        name: "pergolaTrigger"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 61
-        hotspot: ((-71,8),(42,28))
-        pos: (1842,61)
-        usepos: (0,-30)
-    }
-    {
-        name: "bookStoreSaleSign"
-        usedir: "DIR_FRONT"
-        usedir2: "DIR_RIGHT"
-        zsort: 86
-        animations: [
-            {
-                name: "off"
-                frames: [
-                    "sandwich_board_off"
-                ]
-            }
-            {
-                name: "on"
-                frames: [
-                    "sandwich_board_on"
-                ]
-            }
-        ]
-        hotspot: ((-21,-26),(23,28))
-        pos: (1777,113)
-        usepos: (-37,-30)
-        usepos2: (-78,-34)
-    }
-    {
-        name: "bookStoreTrigger"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 64
-        hotspot: ((-195,-13),(-140,39))
-        pos: (2185,64)
-        usepos: (0,-30)
+        pos: (1996,124)
     }
     {
         name: "dumpster"
@@ -828,25 +631,6 @@ objects: [
         hotspot: ((-19,-23),(42,18))
         pos: (1472,118)
         usepos: (0,-31)
-    }
-    {
-        name: "leatherChair"
-        prop: 1
-        zsort: 113
-        animations: [
-            {
-                name: "here"
-                frames: [
-                    "chair"
-                ]
-            }
-            {
-                name: "gone"
-                frames: [
-                ]
-            }
-        ]
-        pos: (1728,113)
     }
     {
         name: "PeterSpot"
@@ -883,15 +667,6 @@ objects: [
         spot: 1
         usedir: "DIR_BACK"
         pos: (1661,88)
-    }
-    {
-        name: "phoneTrigger"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 90
-        hotspot: ((-246,-86),(52,118))
-        pos: (1197,90)
-        usepos: (0,-30)
     }
     {
         name: "dropSpot"
@@ -1695,12 +1470,6 @@ objects: [
         pos: (458,147)
     }
     {
-        name: "saleSignLight"
-        spot: 1
-        usedir: "DIR_FRONT"
-        pos: (1790,80)
-    }
-    {
         name: "streetLight1"
         spot: 1
         usedir: "DIR_FRONT"
@@ -1730,48 +1499,8 @@ objects: [
         usedir: "DIR_FRONT"
         pos: (1315,86)
     }
-    {
-        name: "bookStoreLight"
-        spot: 1
-        usedir: "DIR_FRONT"
-        pos: (2175,102)
-    }
-    {
-        name: "bookStoreWindowLight"
-        spot: 1
-        usedir: "DIR_FRONT"
-        pos: (2327,82)
-    }
-    {
-        name: "willie"
-        prop: 1
-        zsort: 123
-        animations: [
-            {
-                name: "gone"
-                frames: [
-                ]
-            }
-            {
-                name: "here"
-                frames: [
-                    "willie"
-                ]
-            }
-        ]
-        pos: (1635,119)
-    }
-    {
-        name: "willieTrigger"
-        trigger: 1
-        usedir: "DIR_FRONT"
-        zsort: 99
-        hotspot: ((-31,-78),(190,44))
-        pos: (1583,99)
-        usepos: (0,-30)
-    }
 ]
-room_bounds: ((0,0),(2600,240))
+room_bounds: ((1037,0),(1650,240))
 room_size: (2600,240)
 scaling: [
     "1.0@89"
@@ -1779,24 +1508,12 @@ scaling: [
 ]
 walkboxes: [
     {
-        polygon: "(5,88);(33,88);(53,88);(157,88);(164,103);(90,103);(82,103);(17,104);(18,110);(247,108);(248,104);(170,103);(177,88);(366,87);(375,101);(401,101);(406,86);(511,86);(518,87);(586,87);(596,99);(616,99);(624,87);(688,87);(715,100);(771,100);(790,87);(880,87);(885,86);(1144,86);(1130,103);(1045,103);(1046,106);(1131,106);(1151,87);(1173,87);(1176,94);(1275,94);(1277,93);(1180,93);(1178,87);(1589,87);(1621,87);(1634,90);(1687,90);(1718,81);(1808,81);(1993,87);(2084,72);(2162,104);(2184,102);(2195,102);(2238,97);(2221,97);(2164,101);(2090,70);(2269,70);(2579,89);(2583,77);(2268,66);(2066,66);(1987,76);(1889,78);(1831,78);(1801,70);(1564,70);(1565,77);(1563,84);(1543,84);(1543,77);(1544,70);(1241,70);(1241,76);(1239,84);(1214,84);(1213,76);(1214,70);(921,70);(922,77);(923,84);(850,84);(847,77);(846,70);(539,70);(539,77);(538,84);(514,84);(514,77);(515,70);(177,70);(176,77);(176,84);(176,84);(145,84);(144,77);(146,70);(5,70)"
+        polygon: "(1201,87);(1218,96);(1262,96);(1286,87);(1637,87);(1638,37);(1568,37);(1565,77);(1563,84);(1543,84);(1543,77);(1544,37);(1321,35);(1309,78);(1316,83);(1293,84);(1294,78);(1292,35);(1035,36);(1036,86)"
     }
     {
-        polygon: "(82,103);(90,103);(53,88);(33,88)"
+        polygon: "(1289,79);(1315,79);(1325,35);(1287,35)"
     }
     {
-        polygon: "(514,77);(539,77);(539,70);(515,70)"
-    }
-    {
-        polygon: "(144,77);(176,77);(177,70);(146,70)"
-    }
-    {
-        polygon: "(847,77);(922,77);(921,70);(846,70)"
-    }
-    {
-        polygon: "(1213,76);(1241,76);(1241,70);(1214,70)"
-    }
-    {
-        polygon: "(1543,77);(1565,77);(1564,70);(1544,70)"
+        polygon: "(1543,77);(1565,77);(1568,37);(1544,37)"
     }
 ]

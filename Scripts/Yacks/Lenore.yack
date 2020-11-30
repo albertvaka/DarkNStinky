@@ -11,9 +11,8 @@
 -> exit
 
 == start ===
--> bankteller [GLOBAL(hired_lenore_state) == 2]
-
 delores: SAY(12035,"Hi Lenore.")
+-> bankteller_done
 
 if [once]
 	delores: SAY(12036,"What are you doing here? Hanging out by a burning trash can like a bum.")

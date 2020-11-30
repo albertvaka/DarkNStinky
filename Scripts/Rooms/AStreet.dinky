@@ -9,141 +9,25 @@ DEFINE_ROOM("AStreet", {
 	music_pool = "town"
 	ambient_sound = SOUNDID(ambient_town)
 
-	// CAUTION: Keep ThimbleCon ad at the top, since logic must be done when it is read out
-	_noteHeadlines = [
-		[ TEXT(11410,"ThimbleCon advertisement"), TEXT(11411,"a"), [
-			SAY(11361,"It's time to do the ThimbleCon with ThimbleCon '88!")
-			SAY(11362,"Sci-fi shows and movies, comic books, and the latest computer and video game technology!")
-			SAY(11363,"Get your tickets before they are all gone.") ] ]
-		[ TEXT(11412,"official notice"), TEXT(11413,"an"), [
-			SAY(11364,"Please stop throwing your old cans and bottles into the backyard of my bookstore.")
-			SAY(11365,"I know how to curse you!") ] ]
-		[ TEXT(11414,"personals advertisement"), TEXT(11415,"a"), [
-			SAY(11366,"Wanted - Clothes Donations")
-			SAY(11367,"Help Lenore out with some classy clothes.")
-			SAY(11368,"I'd rather you hadn't worn them, but I guess I can't be picky.") ] ]
-		[ TEXT(11416,"banking advertisement"), TEXT(11417,"a"), [
-			SAY(11369,"Safely First Savings - Where saving safely is saving smartly!"),
-			SAY(11370,"The stock market is soaring, we don't see it coming down anytime soon!") ] ]
-		[ TEXT(11418,"public service announcement"), TEXT(11419,"a"), [
-			SAY(11371,"Your sheriff wants you to be green and clean-a-reno!")
-			SAY(11372,"Don't litter on the highway or vandalize the storefronts!") ] ]
-		[ TEXT(11420,"PillowBear™ advertisement"), TEXT(11421,"a"), [
-			SAY(11373,"The latest PillowBears™ are almost here!")
-			SAY(11374,"New colors for 1988!") ] ]
-		[TEXT(11422,"plumbing advertisement"), TEXT(11423,"a"), [
-			SAY(11375,"Pigeon Sisters Plumbing")
-			SAY(11376,"'So let us fix your leaking waters'")
-			SAY(11377,"'Nothing is faster'")
-			SAY(11378,"'than the Pigeon daughters'") ] ]
-		[ TEXT(11424,"missed connection ad"), TEXT(11425,"a"), [
-			SAY(11379,"Looking for Love")
-			SAY(11380,"Seeking the person hanging out at the Vista last night.")
-			SAY(11381,"I think we might have a connection.") ] ]
-		[ TEXT(11426,"old advertisement"), TEXT(11427,"an"), [
-			SAY(11382,"Razor and the Scummettes playing live at The Hitchin' Post!")
-			SAY(11383,"Support by GT and the Suction Cups.")
-			SAY(11384,"Mechanical bull rides free all night!") ] ]
-		[ TEXT(11428,"weathered advertisement"), TEXT(11429,"a"), [
-			SAY(11385,"Stupendous Brothers Traveling Circus")
-			SAY(11386,"Headline Act - Ransome the Clown!")
-			SAY(11387,"Family show starts at 2pm.") ] ]
-		[ TEXT(11430,"radio advertisement"), TEXT(11431,"a"), [
-			SAY(11388,"Turn your dials to KSCUM 198.7 FM for the gnarliest hits from local artists!")
-			SAY(11389,"DJ Cassie says 'I hope you like Tuna Head!'") ] ]
-		[ TEXT(11432,"official announcement"), TEXT(11433,"an"), [
-			SAY(11390,"Ceremony at City Hall")
-			SAY(11391,"City Hall is being renamed the Chuck E. Edmund City Hall...")
-			SAY(11392,"...in honor of everything Chuck has done for the town.")
-			SAY(11393,"Get better Chuck. We miss you.") ] ]
-	]
+	line_done = NO
+	changed_shoes = NO
+	
+	first_time = YES
 
+	enter = function(from_door=null) {
 
-	function assignHeadline(obj, headline) {
-		--headline
-		if (headline < 0 || headline >= sizeof(_noteHeadlines)) {
-			return
-		}
-		local note = _noteHeadlines[headline]
-		obj.name <- note[0]
-		obj.article <- note[1]
-		obj.VERB(read) {
-			sayLine(note[2])
-		}
-	}
-
-	script saleSign() {
-		do {
-			objectState(bookStoreSaleSign, "on")
-			roomLightEnable(1, YES)
-			breaktime(0.5)
-			objectState(bookStoreSaleSign, "off")
-			roomLightEnable(1, NO)
-			breaktime(0.5)
-		}
-	}
-
-
-	function flashPhone() {
-		if (randomodds(SETTING(flashback_odds))) return
- 		heardAbout("phone", YES, YES)
- 		startthread(@{
-			playSoundAt(SOUNDID(quiet_glitch), phone)
-			for (local i = 1..5) {
-				objectState(phone, randomfrom("here","gone"))
-				objectState(phoneBook, randomfrom("here","gone"))
-				breaktime(0.10)
-			}
-			objectState(phone, randomfrom("gone"))
-			objectState(phoneBook, randomfrom("gone"))
-		})
-	}
-
-	// ------------------------------------------------------------------------
-	// Enter/Exit code
-
-
-    function preEnter(from_door=null) {
-		assignHeadline(nickelNote1,  1)
-		assignHeadline(nickelNote2,  2)
-		assignHeadline(nickelNote3,  3)
-		assignHeadline(nickelNote4,  4)
-		assignHeadline(nickelNote5,  5)
-		assignHeadline(nickelNote6,  6)
-		assignHeadline(nickelNote7,  7)
-		assignHeadline(nickelNote8,  8)
-		assignHeadline(nickelNote9,  9)
-		assignHeadline(nickelNote10, 10)
-		assignHeadline(nickelNote11, 11)
-		assignHeadline(nickelNote12, 12)
-    }
-
-	function enter() {
-		startthread(saleSign)
-		objectState(phoneBook, "gone")
-		objectState(phone, "gone")
-
-		if (GLOBAL(hired_lenore_state) == 0) {
-			objectState(trashcan, "fire")
-			objectState(trashcanFire, "fire")
-			actorAt(peter, AStreet, PeterSpot)
-			actorUsePos(peter, AStreet.PeterTalkSpot)
-			actorLockFacing(peter, DIR_LEFT)
-			playAnimation(peter, "sit")
-			actorAt(chuckie, AStreet, ChuckieSpot)
-			actorUsePos(chuckie, AStreet.ChuckieTalkSpot)
-			playAnimation(chuckie, "sit")
-			objectState(leatherChair, "here")
-		} else {
-			actorAt(lenore, Void, point(0,0))
-			actorAt(peter, Void, point(0,0))
-			actorAt(chuckie, Void, point(0,0))
-			objectState(leatherChair, "gone")
-			objectState(trashcan, "gone")
-			objectState(trashcanFire, "gone")
+		if (first_time) {
+			cutscene(@{
+				sayLine(delores, SAY(21074,"Another Saturday, the same old club."))
+				breakwhiletalking()
+				sayLine(delores, SAY(21074,"I hope I find Lenore again tonight."))
+				breakwhiletalking()
+				sayLine(delores, SAY(21074,"First, I need to get in."))
+			})
+			first_time = NO
 		}
 
-		objectUseLighting(leatherChair, YES)
+		cameraFollow(delores)
 
 		local star = 0
 		local starOffset = 815
@@ -161,47 +45,59 @@ DEFINE_ROOM("AStreet", {
 		}
 
 		objectState(phone, "gone")
-		objectState(willie, "gone")
+		//objectState(willie, "gone")
 	}
+
+	function talk_to_bouncer() {
+		if (not line_done) {
+			do_the_queue()
+			return NO
+		} else {
+			sayLine(natalie, SAY(21074,"Don't stay in front."))
+		}
+	}
+
+	do_the_queue = function() {
+		cutscene(@{
+			sayLine(natalie, SAY(21075,"There's a line."))
+			breakwhiletalking()
+			actorFace(delores, DIR_FRONT)
+			sayLine(SAY(21076,"Ok."))
+			breaktime(1)
+			actorWalkTo(delores, AStreet.cuaThirdSpot)
+			breakwhilewalking(delores)
+			breaktime(0.7)
+			actorFace(leonard, DIR_LEFT)
+			startYack(delores, leonard, "Leonard:they_start")
+		})
+	}
+
+	// --------------------------------------------------------------------------------------------
+	postOfficeDoor = DEFINE_OBJECT({
+		name = TEXT(11117,"Dark'n Smelly")
+		default_verb = "verb_enter"
+		no_animation = YES
+		VERB_PRE(enter) {
+			if (not line_done) {
+				do_the_queue()
+				return NO
+			}
+			//if (!changed_shoes) {
+			//	return NO
+			//}
+			return YES
+		}
+		VERB(enter) {
+			playSound(SOUNDID(drawerClose))
+			exitRoomFromDoor(this, Diner.MainStreetDoor)
+		}
+		VERB(lookat) {
+			sayLine(SAY(11399,"Best club in town. They NEVER change the playlist."))
+		}
+	})
 
     function exit() {
     }
-
-	// ------------------------------------------------------------------------
-	// Objects
-
-	postOfficeDoor = DEFINE_OBJECT({
-		name = TEXT(11434,"Post Office door")
-		photo_name = TEXT(11435,"the Post Office door")
-		door_verbs = YES
-		verb_use_text = TEXT(11436,"Enter")
-		verb_use_desc = TEXT(11437,"Enter Post Office")
-		to_door = @PostOffice.door
-		door_sound = { open=SOUNDID(slidingDoorOpen), close=SOUNDID(slidingDoorClose) }
-	})
-
-	nickelDoor = DEFINE_OBJECT({
-		name = TEXT(11438,"Nickel News door")
-		photo_name = TEXT(11439,"the Nickel News door")
-		door_verbs = YES
-		verb_use_text = TEXT(11440,"Enter")
-		verb_use_desc = TEXT(11441,"Enter Nickel News")
-		to_door = @Nickel.door
-		//door_sound = { open=SOUNDID(slidingDoorOpen), close=SOUNDID(slidingDoorClose) }
-	})
-
-	nickelNote1 =  { name = TEXT(11442,"note") bad_story = ["thimblecon", SAY(11394,"This is just text. I need something more impressive for a good photo.")]}
-	nickelNote2 =  { name = TEXT(11443,"note") for_story = "trash"}
-	nickelNote3 =  { name = TEXT(11444,"note") }
-	nickelNote4 =  { name = TEXT(11445,"note") }
-	nickelNote5 =  { name = TEXT(11446,"note") for_story = "trash"}
-	nickelNote6 =  { name = TEXT(11447,"note") bad_story = ["pillow_bears", SAY(11395,"I need something more photographic than a note.")]}
-	nickelNote7 =  { name = TEXT(11448,"note") for_story = "poetry"}
-	nickelNote8 =  { name = TEXT(11449,"note") }
-	nickelNote9 =  { name = TEXT(11450,"note") }
-	nickelNote10 = { name = TEXT(11451,"note") bad_story = ["ransome", SAY(11396,"It's too badly weathered for a good photo.")]}
-	nickelNote11 = { name = TEXT(11452,"note") }
-	nickelNote12 = { name = TEXT(11453,"note") }
 
 	trashcanFire = {}
 	trashcan = DEFINE_OBJECT({
@@ -255,16 +151,6 @@ DEFINE_ROOM("AStreet", {
 	// })
 
 	// --------------------------------------------------------------------------------------------
-	mainStreetDoor = DEFINE_OBJECT({
-		name = TEXT(11456,"Main Street")
-		no_photo = YES
-
-		VERB(walkto) {
-			exitRoomFromDoor(this, MainStreet.AStreetDoor)
-		}
-	})
-
-	// --------------------------------------------------------------------------------------------
 	bottle = DEFINE_OBJECT({
 		name = TEXT(11457,"bottle")
 		article = TEXT(12406,"a")
@@ -282,47 +168,7 @@ DEFINE_ROOM("AStreet", {
 		}
 	})
 
-	// --------------------------------------------------------------------------------------------
-	bookStoreSaleSign = DEFINE_OBJECT({
-		name = TEXT(11458,"sign")
-		photo_name = TEXT(11459,"the bookstore sale sign")
-		photo_reach = REACH_LOW
-		looked_at = NO
-
-		VERB(lookat) {
-			looked_at = YES
-			sayLine(SAY(11404,"Looks like Madame Morena is having one of her never ending occult sales."))
-		}
-	})
-
-	// --------------------------------------------------------------------------------------------
-	bookStoreDoor = DEFINE_OBJECT({
-		name = TEXT(11460,"bookstore door")
-		photo_name = TEXT(11461,"the bookstore door")
-		door_verbs = YES
-		verb_use_text = TEXT(11462,"Enter")
-		verb_use_desc = TEXT(11463,"Enter Occult Bookstore")
-		to_door = @BookStore.outsideDoor
-	})
-
-	bookStoreTrigger = {
-		function triggerEnter(actor) {
-			if (ONCE(YES)) {
-				sayLine(SAY(11405,"Looks like Madame Morena turned off her “spooky” motion sensors."), SAY(11406,"She wasn't fooling anyone with those."), SAY(11407,"And yes, I was using air-quotes."))
-			}
-		}
-	}
-
-	// --------------------------------------------------------------------------------------------
-	leatherChair  = {}
 	phone = {}
-	phoneBook = {}
-
-	phoneTrigger = {
-		function triggerLeave(actor) {
-			flashPhone()
-		}
-	}
 
 	// --------------------------------------------------------------------------------------------
 	dumpster = DEFINE_OBJECT({
@@ -340,29 +186,6 @@ DEFINE_ROOM("AStreet", {
 	})
 
 	// --------------------------------------------------------------------------------------------
-	willie = {}
-	willieTrigger = {
-		function triggerLeave(actor) {
-			if (GLOBAL(hired_lenore_state) || randomodds(SETTING(flashback_odds))) return
-	 		heardAbout("willie1", YES, YES)
-	 		startthread(@{
-				playSoundAt(SOUNDID(quiet_glitch), willie)
-				for (local i = 1..7) {
-					actorHidden(lenore, randomfrom(YES, YES, YES, NO))
-					actorHidden(peter, randomfrom(YES, YES, YES, NO))
-					actorHidden(chuckie, randomfrom(YES, YES, YES, NO))
-					objectState(leatherChair, randomfrom("here","gone"))
-					objectState(willie, randomfrom("here","gone"))
-					breaktime(0.10)
-				}
-				actorHidden(lenore, NO)
-				actorHidden(peter, NO)
-				actorHidden(chuckie, NO)
-				objectState(leatherChair, "here")
-				objectState(willie, "gone")
-			})
-		}
-	}
 // NEW_OBJECT_HERE
 
 	star1 = {}

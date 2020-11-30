@@ -8,6 +8,14 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":1,"h":1},
 	"sourceSize": {"w":1,"h":1}
 },
+"blue_neon_on":
+{
+	"frame": {"x":3,"y":322,"w":99,"h":4},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":99,"h":4},
+	"sourceSize": {"w":99,"h":4}
+},
 "astar_cross1":
 {
 	"frame": {"x":480,"y":187,"w":3,"h":3},

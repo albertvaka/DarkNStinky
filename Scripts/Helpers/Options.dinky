@@ -370,12 +370,11 @@ function openOptions(save_state=YES) {
 	})
 
 	line += 1
-	makeText(point(0,linePos(line)), format(TR(TEXT(12330,"You've handed in %d out of %d photos")), Note.totalCompletedCount(), Note.totalTasksCount()), 2.0)
 
 	line += 1
 	ok_button = makeButton(point(-panel_width/2+80, linePos(line)), TR(TEXT(12331,"Ok")), @() {
 		if (start_language_index != language_index) {
-			useTranslation(getLanguageInfo(language_index).code)
+			//useTranslation(getLanguageInfo(language_index).code)
 		}
 		gameFullscreen(SETTING(fullscreen))
 		closeOptions()
@@ -606,6 +605,11 @@ function openConfirmation(text, button1, button2, callback) {
 local quit_confirmation = NO
 function quitShowing() { return quit_confirmation }
 function openQuitConfirmation(save_state=YES) {
+	
+	
+	quitGame()
+
+
 	if (quit_confirmation) return
 	openConfirmation(TR(TEXT(12349,"Quit now and lose progress on these five photographs?")), TR(TEXT(12350,"NO!")), TR(TEXT(12351,"Quit")), @(button) {
 		if (button == 1) {
